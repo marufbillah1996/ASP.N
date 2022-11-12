@@ -1,0 +1,123 @@
+﻿@model CRUD_Porject.ViewModel.BookInputModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="frm">
+    <div class="row">
+        <div class="col-12">
+            <h3>Create new Book entry</h3>
+            @using (Html.BeginForm("Create", "Books", FormMethod.Post, new { id = "f", enctype = "multipart/form-data" }))
+            {
+                <div class="form-group mb-1">
+                    @Html.LabelFor(x => x.Title, new { @class = "col-form-label col-2" })
+                    <div class="col-4">
+                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group mb-1">
+                    @Html.LabelFor(x => x.Price, new { @class = "col-form-label col-2" })
+                    <div class="col-4">
+                        @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group mb-1">
+                    @Html.LabelFor(x => x.PublishDate, new { @class = "col-form-label col-2" })
+                    <div class="col-4">
+                        @Html.TextBoxFor(x => x.PublishDate, new { @class = "form-control date" })
+                        @Html.ValidationMessageFor(x => x.PublishDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group mb-1">
+                    @Html.LabelFor(x => x.Picture, new { @class = "col-form-label col-2" })
+                    <div class="col-4">
+                        @Html.TextBoxFor(x => x.Picture, new { @class = "form-control", type = "file" })
+                        @Html.ValidationMessageFor(x => x.Picture, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group mb-1">
+                    @Html.LabelFor(x => x.Available, new { @class = "col-form-label col-2" })
+                    <div class="col-4">
+                        @Html.CheckBoxFor(x => x.Available, new { @class = "form-check" })
+                        @Html.ValidationMessageFor(x => x.Available, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group mb-1">
+                    @Html.LabelFor(x => x.GenreID, new { @class = "col-form-label col-form-label-sm col-2" })
+                    <div class="col-4">
+                        @Html.DropDownListFor(x => x.GenreID, new SelectList(ViewBag.Genres, "GenreID", "GenreName"), "Select", new { @class = "form-select form-select-sm" })
+                        @Html.ValidationMessageFor(x => x.GenreID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group mb-1">
+                    @Html.LabelFor(x => x.PublisherID, new { @class = "col-form-label col-2" })
+                    <div class="col-4">
+                        @Html.DropDownListFor(x => x.PublisherID, new SelectList(ViewBag.Publishers, "PublisherID", "PublisherName"), "Select one", new { @class = "form-select select" })
+                        @Html.ValidationMessageFor(x => x.PublisherID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between mb-1">
+                    <h4>Authors</h4>
+                    <button type="button" id="add" class="btn btn-secondary btn-sm">+</button>
+                </div>
+                <div id="child">
+                    @Html.Action("CreateNewField")
+                </div>
+                <div class="form-group mb-1">
+
+                    <div class="col-4 offset-2">
+                        <button type="submit" class="btn btn-primary">Save</button>
+
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section styles {
+    <link href="~/Content/bootstrap-datepicker.standalone.css" rel="stylesheet" />
+    <style>
+
+        .col2 {
+            display: grid;
+            grid-template-columns: 2fr 1fr 2fr 1fre
+        }
+    </style>
+}
+@section scripts {
+    <script src="~/Scripts/jquery-3.6.0.js"></script>
+    <script src="~/Scripts/bootstrap-datepicker.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script>
+        function onSuccess() {
+            $("#f").trigger('reset');
+        }
+        $(".date").datepicker({
+            format: "yyyy-mm-dd"
+        });
+        
+    </script>
+    <script>
+        $(() => {
+
+            $("#add").click(() => {
+                var data = $("#f").serialize();
+                console.log(data);
+                $.ajax({
+                    type: "POST",
+                    url: "/Books/CreateNewField",
+
+                    data: data,
+                    success: r => {
+                        $("#child").append(r)
+                    }
+
+                });
+            });
+        });
+    </script>
+}
+

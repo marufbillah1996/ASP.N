@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - ASP.NET MVC CRUD</title>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.bundle.js"></script>
+    <style>
+
+        body {
+            background-color: linen;
+            padding-top: 70px;
+        }
+       
+    </style>
+    @RenderSection("styles", false)
+
+</head>
+<body>
+    <nav class="navbar navbar-light  navbar-expand-lg fixed-top  shadow-sm" style="background-color:aquamarine;">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" 
+                    aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <span class="navbar-brand">Monthly<sup>Exam</sup><sub>08</sub></span>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="navbar-nav nav ">
+                    <li class="nav-item ">
+                        @Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item ">
+                        @Html.ActionLink("Author", "Index", "Authors", new { }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item ">
+                        @Html.ActionLink("Genre", "Index", "Genres", new { }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item ">
+                        @Html.ActionLink("Publisher", "Index", "Publishers", new { }, new { @class = "nav-link" })
+                    </li>
+                    @*<li class="nav-item ">
+                        @Html.ActionLink("Customer", "Index", "Customers", new { }, new { @class = "nav-link" })
+                    </li>*@
+                    <li class="nav-item ">
+                        @Html.ActionLink("Book", "Index", "Books", new { }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item ">
+                        @Html.ActionLink("Sale", "Index", "Sales", new { }, new { @class = "nav-link" })
+                    </li>
+                </ul>
+                @if (Request.IsAuthenticated)
+                {
+                    <ul class="navbar-nav nav ms-auto">
+
+                        <li class="nav-item">
+                            @Html.ActionLink("Logout", "Logout", "Account", new { }, new { @class = "nav-link" })
+                        </li>
+
+
+                    </ul>
+
+                }
+                else
+                {
+                    <ul class="navbar-nav nav ms-auto">
+                        <li class="nav-item">
+                            @Html.ActionLink("Register", "Register", "Account", new { }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Login", "Login", "Account", new { }, new { @class = "nav-link" })
+                        </li>
+
+
+                    </ul>
+                }
+            </div>
+        </div>
+    </nav>
+    <section class="container-fluid main">
+        @RenderBody()
+    </section>
+    <footer class="container-fluid">
+        <p>ID:1268006</p>
+        <p>Name: Md.Maruf Billah</p>
+    </footer>
+    @RenderSection("scripts", false)
+</body>
+</html>

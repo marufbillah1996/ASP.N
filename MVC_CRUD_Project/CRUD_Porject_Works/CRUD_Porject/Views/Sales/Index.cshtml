@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CRUD_Porject.Models.Customer>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3>Customer</h3>
+        <div class="d-flex justify-content-end mb-1">
+            @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+        <table class="table table-bordered">
+            <thead class="bg-light">
+                <tr>
+                    <th>@Html.DisplayNameFor(b => b.CustomerID)</th>
+                    <th>@Html.DisplayNameFor(b => b.CustomersName)</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(t => x.CustomerID)</td>
+                        <td>@Html.DisplayFor(t => x.CustomersName)</td>
+                    </tr>
+                    <tr>
+                        <td class="border-end-0">&nbsp;</td>
+                        <td colspan="2" class="border-start-0">
+                            <h3>Books</h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Book Name</th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var y in x.Sales)
+                                    {
+                                        <tr>
+                                            <td>@y.Book.BookName</td>
+                                           
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

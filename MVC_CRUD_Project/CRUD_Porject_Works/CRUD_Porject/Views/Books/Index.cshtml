@@ -1,0 +1,71 @@
+﻿@model IEnumerable<CRUD_Porject.Models.Book>
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<div class="row">
+    <div class="col-12">
+        <h3>Books</h3>
+        <div class="d-flex justify-content-end mb-1">
+            @Html.ActionLink("Create New", "Create", new { }, new {@class="btn btn-primary btn-sm"})
+        </div>
+        <table class="table table-bordered">
+            <thead class="bg-light">
+                <tr>
+                    <th>@Html.DisplayNameFor(b => b.Picture)</th>
+                    <th>@Html.DisplayNameFor(b => b.BookName)</th>
+                    <th>@Html.DisplayNameFor(b => b.Price)</th>
+                    <th>@Html.DisplayNameFor(b => b.PublishDate)</th>
+                    <th>@Html.DisplayNameFor(b => b.Available)</th>
+                    <th>@Html.DisplayNameFor(b => b.PublisherID)</th>
+                    <th>@Html.DisplayNameFor(b => b.GenreID)</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var x in Model)
+            {
+                <tr>
+                    <td style="width:70px" class="text-center">
+                        <img src="~/Uploads/@x.Picture" style="width:40px" class="rounded-circle" />
+                    </td>
+                    <td>@Html.DisplayFor(t => x.BookName)</td>
+                    <td>@Html.DisplayFor(t => x.Price)</td>
+                    <td>@Html.DisplayFor(t => x.PublishDate)</td>
+                    <td>@Html.DisplayFor(t => x.Available)</td>
+                    <td>@Html.DisplayFor(t => x.Publisher.PublisherName)</td>
+                    <td>@Html.DisplayFor(t => x.Genre.GenreName)</td>
+                </tr>
+                <tr>
+                    <td class="border-end-0">&nbsp;</td>
+                    <td colspan="5" class="border-start-0">
+                        <h3>Author</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Author Name</th>
+                                    <th>Author Address</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var y in x.BookAuthors)
+                                {
+                                    <tr>
+                                        <td>@y.Author.AuthorName</td>
+                                        <td>@y.Author.AuthorAddress</td>
+                                        
+                                    </tr>
+                                    
+                                }
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

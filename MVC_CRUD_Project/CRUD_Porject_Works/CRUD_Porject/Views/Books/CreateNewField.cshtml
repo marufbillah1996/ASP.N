@@ -1,0 +1,10 @@
+﻿@model CRUD_Porject.Models.BookAuthor
+
+<div class="form-group row mb-1">
+    @Html.LabelFor(x=> x.AuthorID, new {@class="col-form-label col-2"})
+    <div class="col-4">
+        @Html.DropDownListFor(x=> x.AuthorID, new SelectList(ViewBag.AUthors, "AuthorID", "AuthorName"), "Select", new {@class="form-select select"})
+        @Html.ValidationMessageFor(x=> x.AuthorID, "", new {@class="text-danger"})
+    </div>
+</div>
+

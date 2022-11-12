@@ -1,0 +1,40 @@
+﻿@model CRUD_Porject.Models.Author
+@using (Ajax.BeginForm("EditAuthor", "Authors", new { }, new AjaxOptions
+{
+    HttpMethod = "Post",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "alert",
+    LoadingElementId = "spinner"
+
+}, new { id = "f" }))
+{
+    @Html.HiddenFor(x => x.AuthorID)
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.AuthorName, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-4">
+            @Html.TextBoxFor(x => x.AuthorName, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(x => x.AuthorName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.AuthorAddress, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-4">
+            @Html.TextBoxFor(x => x.AuthorAddress, new { @class = "form-control form-control-sm" })
+            @Html.ValidationMessageFor(x => x.AuthorAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row mb-1">
+        @Html.LabelFor(x => x.Gender, new { @class = "col-form-label col-form-label-sm col-2" })
+        <div class="col-4">
+            @Html.EnumDropDownListFor(x => x.Gender, new { @class = "form-select form-select-sm" })
+            @Html.ValidationMessageFor(x => x.Gender, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row mb-1">
+        <div class="col-4 offset-2">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+}
+

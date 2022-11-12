@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CRUD_Porject.Models.Genre>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3>Authors</h3>
+        <div class="d-flex justify-content-end mb-1">
+            @Html.ActionLink("Add New", "Create", "Genres", new { }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+        <table class="table table-bordered table-striped border-success">
+            <thead class="text-bg-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(x=>x.GenreName)</th>
+                    
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var g in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(x => g.GenreName)</td>
+                        
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Genres", new { id = g.GenreID }, new { @class = "btn btn-secondary btn-sm" })
+                            <a href="@Url.Action("Delete", "Genres", new {id=g.GenreID})" class="btn btn-danger btn-sm @(g.Books.Count > 0 ? "disabled" :"")">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

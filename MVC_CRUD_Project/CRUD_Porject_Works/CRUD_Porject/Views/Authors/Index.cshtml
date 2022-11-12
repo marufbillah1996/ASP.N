@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CRUD_Porject.Models.Author>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-12">
+        <h3>Authors</h3>
+        <div class="d-flex justify-content-end mb-1">
+            @Html.ActionLink("Add New","Create","Authors",new { }, new {@class="btn btn-primary btn-sm"})
+        </div>
+        <table class="table table-bordered table-striped border-success">
+            <thead class="text-bg-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(x=>x.AuthorName)</th>
+                    <th>@Html.DisplayNameFor(x=>x.AuthorAddress)</th>
+                    <th>@Html.DisplayNameFor(x => x.Gender)</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var a in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => a.AuthorName)</td>
+                    <td>@Html.DisplayFor(x => a.AuthorAddress)</td>
+                    <td>@Html.DisplayFor(x => a.Gender)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Authors", new { id = a.AuthorID }, new { @class = "btn btn-secondary btn-sm" })
+                        <a href="@Url.Action("Delete", "Authors", new {id=a.AuthorID})" class="btn btn-danger btn-sm @(a.BookAuthors.Count > 0 ? "disabled" :"")">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

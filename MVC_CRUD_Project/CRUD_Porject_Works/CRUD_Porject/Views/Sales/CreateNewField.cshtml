@@ -1,0 +1,9 @@
+﻿@model CRUD_Porject.Models.SaleDetail
+
+<div class="form-group  mb-1">
+    @Html.LabelFor(x => x.BookID, new { @class = "col-form-label col-2" })
+    <div class="col-4">
+        @Html.DropDownListFor(x => x.BookID, new SelectList(ViewBag.Books, "BookID", "BookName"), "Select", new { @class = "form-select select" })
+        @Html.ValidationMessageFor(x => x.BookID, "", new { @class = "text-danger" })
+    </div>
+</div>
